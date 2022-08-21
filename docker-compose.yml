@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   db:
@@ -25,9 +25,7 @@ services:
       context: build
       dockerfile: Dockerfile
     volumes:
-      - type: volume
-        source: app
-        target: /opt/app/target
+      - app:/opt/app/target
 
   webapp:
     build:
@@ -36,9 +34,7 @@ services:
     ports:
       - "80:8080"
     volumes:
-      - type: volume
-        source: app
-        target: /opt/apache-tomcat-10.0.23/webapps
+      - app:/opt/apache-tomcat-10.0.23/webapps
     depends_on:
       - build_app
 
