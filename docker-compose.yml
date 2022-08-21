@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  db:
+    image: percona:5.4
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - /opt/webapp/mysql/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "BzbPSQdNBMoU"
+      MYSQL_DATABASE: "db_app"
+      MYSQL_USER: "dbadmin"
+      MYSQL_PASSWORD: "yBbAI5uvlpWV"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+  build_app:
+    build:
+      context: build
+      dockerfile: Dockerfile
+    volumes:
+      - type: volume
+        source: app
+        target: /opt/app/target
+
+  webapp:
+    build:
+      context: prod
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    volumes:
+      - type: volume
+        source: app
+        target: /opt/apache-tomcat-10.0.23/webapps
+    depends_on:
+      - build_app
+
+volumes:
+  app:
