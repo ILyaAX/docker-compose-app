@@ -2,17 +2,17 @@ version: '3'
 
 services:
   db:
-    image: percona:8
+    image: mariadb:10.6
     restart: always
     ports:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "BzbPSQdNBMoU"
-      MYSQL_DATABASE: "db_app"
-      MYSQL_USER: "dbadmin"
-      MYSQL_PASSWORD: "yBbAI5uvlpWV"
+      MARIADB_ROOT_PASSWORD: "BzbPSQdNBMoU"
+      MARIADB_DATABASE: "db_app"
+      MARIADB_USER: "dbadmin"
+      MARIADB_PASSWORD: "yBbAI5uvlpWV"
 
   adminer:
     image: adminer
