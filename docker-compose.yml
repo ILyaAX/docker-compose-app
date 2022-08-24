@@ -7,7 +7,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /opt/webapp/mysql/:/var/lib/mysql
+      - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "BzbPSQdNBMoU"
       MYSQL_DATABASE: "db_app"
@@ -19,6 +19,8 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    depends_on:
+      - db
 
   build_app:
     build:
@@ -37,6 +39,8 @@ services:
       - app:/opt/apache-tomcat-10.0.23/webapps
     depends_on:
       - build_app
+      - db
 
 volumes:
   app:
+  mysql:
