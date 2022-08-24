@@ -33,6 +33,9 @@ services:
     build:
       context: prod
       dockerfile: Dockerfile
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk/jre
+      - JRE_HOME=/usr/lib/jvm/java-1.7-openjdk/jre
     ports:
       - "80:8080"
     volumes:
