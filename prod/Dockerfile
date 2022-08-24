@@ -4,6 +4,6 @@ RUN apk update && apk add openjdk7-jre-base
 RUN wget https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.16/bin/apache-tomcat-6.0.16.tar.gz && \
 	tar -xvzf apache-tomcat-6.0.16.tar.gz && \
 	rm apache-tomcat-6.0.16.tar.gz
-COPY ./Config.properties /opt/apache-tomcat-6.0.16/ROOT/Config.properties
+COPY ./Config.properties /opt/ROOT/Config.properties
 EXPOSE 8080
 CMD ["/opt/apache-tomcat-6.0.16/bin/catalina.sh", "run"]
